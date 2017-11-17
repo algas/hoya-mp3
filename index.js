@@ -42,6 +42,8 @@ let convert = (input, output, response) => {
 let action = (text, response) => {
   const postData = querystring.stringify({
     text: text,
+    emotion: 'happiness',
+    emotion_level: 4,
     speaker: 'hikari'
   });
   console.log('postData = ', postData);
@@ -73,7 +75,7 @@ let decNumRefToString = (decNumRef) => {
 
 http.createServer((request, response) => {
   console.log(request.url);
-  const text = decNumRefToString(url.parse(request.url, true).query.text);
+  const text = decNumRefToString(url.parse(request.url, true).query.text).replace(/\s/g,'');
   console.log(text);
   action(text, response);
 }).listen(5000);
