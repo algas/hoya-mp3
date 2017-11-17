@@ -5,7 +5,6 @@ RUN mkdir $work
 WORKDIR ${work}
 COPY index.js $work
 COPY package.json $work
-COPY example.mp3 $work
 RUN npm install
 EXPOSE 5000
 CMD ["npm", "run",  "start"]
