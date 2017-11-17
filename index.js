@@ -67,7 +67,7 @@ let action = (text, response) => {
 
 http.createServer((request, response) => {
   console.log(request.url);
-  const text = url.parse(request.url, true).query.text;
+  const text = decodeURI(url.parse(request.url, true).query.text);
   console.log(text);
   action(text, response);
 }).listen(5000);
