@@ -65,9 +65,15 @@ let action = (text, response) => {
   req.end();
 }
 
+let decNumRefToString = (decNumRef) => {
+	return decNumRef.replace(/&#(\d+);/ig, (match, $1, idx, all) => {
+		return String.fromCharCode($1);
+	});
+}
+
 http.createServer((request, response) => {
   console.log(request.url);
-  const text = decodeURI(url.parse(request.url, true).query.text);
+  const text = decNumRefToString(url.parse(request.url, true).query.text);
   console.log(text);
   action(text, response);
 }).listen(5000);
