@@ -7,4 +7,4 @@ COPY index.js $work
 COPY package.json $work
 RUN npm install
 EXPOSE 5000
-CMD ["npm", "run",  "start"]
+CMD ["npm", "start"]
