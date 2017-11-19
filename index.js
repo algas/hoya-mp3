@@ -68,14 +68,20 @@ let action = (text, response) => {
 }
 
 let decNumRefToString = (decNumRef) => {
-	return decNumRef.replace(/&#(\d+);/ig, (match, $1, idx, all) => {
-		return String.fromCharCode($1);
-	});
+  if(decNumRef){
+    return decNumRef.replace(/&#(\d+);/ig, (match, $1, idx, all) => {
+      return String.fromCharCode($1);
+    });
+  }
+  return null;
 }
 
 http.createServer((request, response) => {
   console.log(request.url);
-  const text = decNumRefToString(url.parse(request.url, true).query.text).replace(/\s/g,'');
-  console.log(text);
-  action(text, response);
+  let text = decNumRefToString(url.parse(request.url, true).query.text);
+  if(text){
+    text = text.replace(/\s/g,'');
+    console.log(text);
+    action(text, response);
+  }
 }).listen(5000);
