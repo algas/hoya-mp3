@@ -80,10 +80,11 @@ http.createServer((request, response) => {
   console.log(request.url);
   let text = decNumRefToString(url.parse(request.url, true).query.text);
   let emotion = url.parse(request.url, true).query.emotion;
-  if(text){
+  if(text && emotion){
     text = text.replace(/\s/g,'');
-    emotion = emotion.replace(/\s/g,'');
     console.log(text);
-    action(emotion, text, response);
+    console.log(emotion);
+    // return text;
+   action(emotion, text, response);
   }
 }).listen(5000);
