@@ -39,10 +39,10 @@ let convert = (input, output, response) => {
     });
 }
 
-let action = (text, response) => {
+let action = (emotion, text, response) => {
   const postData = querystring.stringify({
     text: text,
-    emotion: 'happiness',
+    emotion: emotion,
     emotion_level: 4,
     speaker: 'hikari'
   });
@@ -79,9 +79,11 @@ let decNumRefToString = (decNumRef) => {
 http.createServer((request, response) => {
   console.log(request.url);
   let text = decNumRefToString(url.parse(request.url, true).query.text);
+  let emotion = url.parse(request.url, true).query.emotion;
   if(text){
     text = text.replace(/\s/g,'');
+    emotion = emotion.replace(/\s/g,'');
     console.log(text);
-    action(text, response);
+    action(emotion, text, response);
   }
 }).listen(5000);
