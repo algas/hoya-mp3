@@ -1,4 +1,4 @@
-FROM mhart/alpine-node:8.9
+FROM node:8.9
 LABEL maintainer="Masahiro Yamauchi <sgt.yamauchi@gmail.com>"
 ENV work /work
 RUN mkdir $work
